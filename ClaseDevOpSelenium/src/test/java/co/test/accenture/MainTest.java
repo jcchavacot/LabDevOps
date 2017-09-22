@@ -7,8 +7,10 @@ package co.test.accenture;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -25,7 +27,8 @@ public class MainTest {
 
     private WebDriver driver;
     private static final String AMBIENTE = "LOCAL";
-    private static final String BASE_URL = "http://clarognc.azurewebsites.net/";
+    //private static final String BASE_URL = "http://clarognc.azurewebsites.net/";
+    private static final String BASE_URL = "https://es-la.facebook.com/";
     
 
     public MainTest() {
@@ -38,6 +41,7 @@ public class MainTest {
     public void hello() {
         if(this.driver != null){
             this.driver.get(BASE_URL);
+            llenarFormulario();
         }
     }
 
@@ -61,6 +65,9 @@ public class MainTest {
 
     @AfterMethod
     public void tearDownMethod() throws Exception {
+        if(this.driver != null){
+           // this.driver.close();
+        }
     }
 
     private void initLocalSelenium() {
@@ -79,5 +86,47 @@ public class MainTest {
             System.out.println(e.getMessage());
         }
 
+    }
+    
+    private void llenarFormulario(){
+        WebElement nombre;
+        WebElement apellido;
+        WebElement correo;
+        WebElement correo2;
+        WebElement pass;
+        WebElement day;
+        WebElement month;
+        WebElement year;
+        
+        try{
+            nombre = this.driver.findElement(By.id("u_0_f"));
+            apellido = this.driver.findElement(By.id("u_0_h"));
+            correo = this.driver.findElement(By.id("u_0_k"));
+            correo2 = this.driver.findElement(By.id("u_0_n"));
+            pass = this.driver.findElement(By.id("u_0_r")); 
+            day = this.driver.findElement(By.id("day")); 
+            month = this.driver.findElement(By.id("month")); 
+            year = this.driver.findElement(By.id("year")); 
+            
+            
+            nombre.clear();
+            nombre.sendKeys("Mi nombre");
+            
+            apellido.clear();
+            apellido.sendKeys("Mi apellido");
+            
+            correo.clear();
+            correo.sendKeys("arroba@gmail.com");
+            
+            correo2.clear();
+            correo2.sendKeys("arroba@gmail.com");
+            
+            pass.clear();
+            pass.sendKeys("12345");
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
