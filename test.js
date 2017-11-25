@@ -1,3 +1,4 @@
 {
-    name:"asdf"
+    name:"asdf",
+    email:"asdf"
 }
